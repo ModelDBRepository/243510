@@ -79,7 +79,7 @@ gEhat=Sol(:,2);
 gIhat=Sol(:,3);
 
 % 3. Filter the results to smooth the traces...
-disp('Would you like to filter your resuts (using a median filter)?')
+disp('Would you like to filter your results (using a median filter)? (surround answer in single quotes)')
 mfilter = input('Yes (Y), No (N): ');
 if strcmp(mfilter,'Y') || strcmp(mfilter,'y') || strcmp(mfilter,'Yes') || strcmp(mfilter,'yes')
     nfilt=(TimeW/dt)/2;

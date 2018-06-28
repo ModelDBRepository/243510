@@ -1,0 +1,71 @@
+<html>
+<p><hr/>
+</p>
+<pre>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;            QIF method code - by Catalina Vich
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;                 from [Vich et al. 2017]
+</pre>
+<p><hr/>
+</p>
+<p/> This is the readme for the code associated with the paper:<p/>
+Vich C, Berg RW, Guillamon A, Ditlevsen S (2017) Estimation of Synaptic Conductances in Presence of Nonlinear Effects Caused by Subthreshold Ionic Currents. Front Comput Neurosci 11:69<br/>
+<a href="http://dx.doi.org/10.3389/fncom.2017.00069">http://dx.doi.org/10.3389/fncom.2017.00069</a>
+<p>(1) MAIN ROUTINE: mainQIFestimator
+</p>
+<p> mainQIFestimator is the main program to estimate the excitatory and the inhibitory conductances on the subthreshold regime when some ionic current of quadratic type are active in the subthreshold regime.
+</p>
+<p> Input parameters: 
+</p><pre>
+       v:  vector containing the voltage of the neuron (mV).
+       dt: the time step that v has been recovered (ms).
+       TimeW: the time window where the conductances are supposed to be
+              stationary (100ms in our experimental data).
+       neuronParameters: vector containing [C vE vI vT IT gL vL Iapp] such that
+                         C is the membrane capacitance (constant)
+                         vE is the excitatory reversal potential (constant)
+                         vI is the inhibitory reversal potential (constant)
+                         (IT,vT) is the bifurcation point of the v-I curve
+                                 or the first non-zero value of tge f-I
+                                 curve (both are constant)
+                         gL leak conductance (constant)
+                         vL leak reversal potential (constant)
+                         Iapp is the applied current (constant)
+</pre>
+<p> Output parameters:
+</p><pre>
+       Program returns a constant value ahat, and vectors that, gEhat,
+       gIhat, such that
+
+            ahat:   the quadratic coefficient
+            that:   time vector for the estimated conductances
+            gEhat:  estimated excitatory conductance (nS/cm^2)
+            gIhat:  estimated inhibitory conductance (nS/cm^2)
+</pre>
+<p>The code asks to the user if they want to filter the data or not. 
+Type 'Y' if you do, type 'N' if you do not (between single quotes).
+</p>
+<p><strong>(2) SUB-ROUTINES: </strong>
+</p>
+<p>MLEquadratic.m which contains the maximum likelihood estimator (MLE).
+</p>
+<p>QIFestimateGs.m to estimate gE and gI knowing the coefficient 'a'
+</p>
+<p>QIFestimatorREC.m to estimate gE, gI and a
+</p>
+<p><strong>(*) TYPE ON THE MATLAB COMMAND PROMPT</strong>
+</p>
+<p>[ahat, that, gEhat, gIhat] = mainQIFestimator(v,t0,tf,dt,TimeW,neuronParameters);
+</p>
+<p>to run the code. The estimated excitatory and inhibitory conductances are gEhat and gIhat, respectively. 
+</p>
+<p><strong>(3) EXAMPLES FROM THE PAPER AND SUPPLEMENTARY MATERIAL</strong>
+<P/>
+Type stellate_paper on the matlab command line and type 'Y' when asked to generate a figure similar to figure 3 A, B in the paper:<br/>
+<img src="./images/stellate_compare_filtered.png" alt="filtered stellate">
+<p/>
+Run pyr_suppl on the matlab command line and type 'Y' when asked to generate a figure similar to the paper's supplementary material figure S3 A, B:<br/>
+<img src="./images/pyr_compare_filtered.png" alt="filtered pyramidal">
+<p/>
+20180628 Updates from Catalina Vich include matlab data files and code for
+examples from the paper.
+</html>
